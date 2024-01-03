@@ -52,12 +52,14 @@
         "cdevice",
         "CONTROLLERBUTTONDOWN",
         "CONTROLLERDEVICEADDED",
+        "eabi",
         "flatpak",
         "GAMECONTROLLER",
         "PPSSPP",
         "PRESENTVSYNC",
         "PSPSDK",
         "thid",
+        "VITASDK",
         "WINDOWPOS"
     ]
 }
