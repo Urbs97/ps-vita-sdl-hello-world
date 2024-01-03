@@ -12,10 +12,6 @@ enum
 SDL_Texture* LoadSprite(const char* file, SDL_Renderer* renderer)
 {
     SDL_Texture* texture = IMG_LoadTexture(renderer, file);
-    if (texture == nullptr)
-    {
-        return nullptr;
-    }
     return texture;
 }
 
