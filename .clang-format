@@ -1,0 +1,9 @@
+---
+BasedOnStyle: Microsoft
+PointerAlignment: Left
+SortIncludes: true
+Cpp11BracedListStyle: false
+AllowShortLoopsOnASingleLine: true
+AllowShortBlocksOnASingleLine: true
+AllowShortFunctionsOnASingleLine: true
+SeparateDefinitionBlocks: Always
