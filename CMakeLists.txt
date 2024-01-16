@@ -30,11 +30,23 @@ set(VITA_VERSION  "01.00")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu11")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 
+# Add ImGui library
+set(IMGUI_DIR ${CMAKE_CURRENT_SOURCE_DIR}/libs/imgui)
+
+# Automatically include all .cpp files in the ImGui directory
+file(GLOB IMGUI_SOURCES ${IMGUI_DIR}/*.cpp)
+
+add_library(imgui ${IMGUI_SOURCES})
+
+# Set the include directory to the parent of IMGUI_DIR
+target_include_directories(imgui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/libs)
+
 add_executable(${PROJECT_NAME}
   src/main.cpp
 )
 
 target_link_libraries(${PROJECT_NAME}
+  imgui
   SDL2
   SDL2_image
   png
@@ -70,13 +82,13 @@ vita_create_vpk(${PROJECT_NAME}.vpk ${VITA_TITLEID} ${PROJECT_NAME}.self
 add_custom_command(
     OUTPUT run_vita3k
     COMMAND ./Vita3K-x86_64.AppImage ./ps-vita-sdl-hello-world.vpk
-    DEPENDS ps-vita-sdl-hello-world
+    DEPENDS ${PROJECT_NAME}.vpk
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMENT "Running Vita3K with ps-vita-sdl-hello-world.vpk"
     USES_TERMINAL
 )
 
-# Custom target that depends on the above custom command
+# Custom target that depends on the above custom command and the main build target
 add_custom_target(run
-    DEPENDS run_vita3k
+    DEPENDS run_vita3k ${PROJECT_NAME}
 )
